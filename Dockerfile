@@ -102,6 +102,17 @@ RUN wget https://github.com/mikefarah/yq/releases/download/v4.33.3/yq_linux_386 
     chmod +x /usr/bin/yq
 
 # ###########################################
+# # docker cli
+# ###########################################
+RUN apt-get update && \
+    apt-get install -y apt-transport-https ca-certificates curl software-properties-common lsb-release && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+    echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-get install -y docker-ce-cli && \
+    rm -rf /var/lib/apt/lists/*
+
+# ###########################################
 # # misc
 # ###########################################
 # see https://stackoverflow.com/a/10872202/19269 and https://unix.stackexchange.com/a/87763/27677
