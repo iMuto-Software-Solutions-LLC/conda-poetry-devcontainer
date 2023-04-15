@@ -111,6 +111,9 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce-cli && \
     rm -rf /var/lib/apt/lists/*
+# Create a 'docker' group and add the 'vscode' user to it, to allow the user to run docker commands
+RUN groupadd docker && \
+    usermod -aG docker vscode
 
 # ###########################################
 # # misc
