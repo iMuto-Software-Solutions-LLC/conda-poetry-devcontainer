@@ -111,8 +111,6 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce-cli && \
     rm -rf /var/lib/apt/lists/*
-# Change the Docker socket file permissions to allow the 'vscode' user to access it
-RUN chmod 666 /var/run/docker.sock
 
 # ###########################################
 # # misc
@@ -128,3 +126,9 @@ USER ${USERNAME}
 RUN cd /home/${USERNAME}/.oh-my-zsh && ./tools/upgrade.sh 
 
 WORKDIR /home/${USERNAME}
+
+# Copy entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
