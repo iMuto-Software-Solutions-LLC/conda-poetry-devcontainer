@@ -10,7 +10,7 @@ image := $(registry)/$(repository):$(commit_sha)
 image := $(repository):$(commit_sha)
 
 build: ## build docker image
-	docker build . -t $(image)
+	docker build . -t $(image) --progress=plain
 	docker history ${image}
 	docker image ls ${image}
 
